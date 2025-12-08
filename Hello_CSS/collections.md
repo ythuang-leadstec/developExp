@@ -14,6 +14,14 @@
 
 
 ### 一些需求实现
+#### 添加背景阴影使其凸出显示
+**需求**: 一个定位的弹窗关闭按钮(白色X号)显示不清晰
+**想法**: 给关闭按钮盒子添加一层灰色的底色来凸出显示X号
+1. 想到背景灰色渐变`background: linear-gradient`,但是只是内部盒子有颜色,显得有点突兀
+2. 又想到`box-shadow`来添加外阴影.
+
+**解决**: 直接使用`filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.5));`为X号添加阴影
+
 #### 图片随屏幕缩放固定比例进行缩放
 ##### 1. 定位 + img + padding
 ```html
@@ -363,3 +371,15 @@ background: linear-gradient(to bottom, rgba(1,1,1,0), rgba(0,0,0,0.8));
   - inside
   + outside
 
+
+
+改svg颜色
+
+```css
+.cls-100 {
+  fill: none;
+  stroke: #000;
+  stroke-width: 0.5px;
+  fill-rule: evenodd;
+}						
+```
