@@ -298,15 +298,15 @@ export class MyElement extends LitElement {
 }
 ```
 
-# shadow dom
+## shadow dom
 
-## 访问 shadow dom 中的节点
+### 访问 shadow dom 中的节点
 
-### renderRoot
+#### renderRoot
 
 Lit 将组件渲染到其 renderRoot 中，可以使用 this.shadowRoot.querySelector()来访问 shadow dom 中的节点。
 
-### @query,@queryAll 和 queryAsync 装饰器
+#### @query,@queryAll 和 queryAsync 装饰器
 
 ```js
 @query('#first')
@@ -325,3 +325,26 @@ get _buttons() {
 ```
 
 @queryAsync 类似于@query,但是返回的是一个 Promise,等待节点出现后才 resolve。
+
+#### createRenderRoot
+默认实现创建一个开放的 shadow root，并向其添加在 static styles 类字段中设置的任何样式
+
+当返回 this 时，Lit 就不会创建 Shadow Root,会直接把模板内容渲染为元素的直接子节点。这被称为 Light DOM（也就是我们平时最普通的 DOM 结构）。
+```js
+  createRenderRoot() {
+    return this; // 返回组件实例本身，而不是 shadow root
+  }
+```
+## 装饰器
+| 装饰器 | 说明 | 相关概念 |
+|--------|------|----------|
+| @customElement | 定义自定义元素 | [定义](https://lit.tips/docs/components/defining/) |
+| @eventOptions | 添加事件监听器选项 | [事件](https://lit.tips/docs/components/events/#event-options-decorator) |
+| @property | 定义公共属性 | [属性](https://lit.tips/docs/components/properties/#declare-with-decorators) |
+| @state | 定义私有状态属性 | [属性](https://lit.tips/docs/components/properties/#declare-with-decorators) |
+| @query | 定义返回组件模板中元素的属性 | [Shadow DOM](https://lit.tips/docs/components/shadow-dom/#query) |
+| @queryAll | 定义返回组件模板中元素列表的属性 | [Shadow DOM](https://lit.tips/docs/components/shadow-dom/#query-all) |
+| @queryAsync | 定义返回解析为组件模板中元素的 promise 的属性 | [Shadow DOM](https://lit.tips/docs/components/shadow-dom/#query-async) |
+| @queryAssignedElements | 定义返回分配给特定插槽的子元素的属性 | [Shadow DOM](https://lit.tips/docs/components/shadow-dom/#query-assigned-nodes) |
+| @queryAssignedNodes | 定义返回分配给特定插槽的子节点的属性 | [Shadow DOM](https://lit.tips/docs/components/shadow-dom/#query-assigned-nodes) |
+
